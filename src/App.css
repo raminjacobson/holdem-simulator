@@ -1,0 +1,102 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  font: 18px arial;
+  font-weight: bold;
+  padding: 15px 50px;
+}
+
+.card {
+  width: 125px;
+}
+
+.card-small {
+  width: 100px;
+}
+
+.felt {
+  position: relative;
+  padding-left: 200px;
+  margin: 0 auto;
+  width: 800px;
+  height: 500px;
+  line-height: 700px;
+  vertical-align: middle;
+  background: url(https://previews.123rf.com/images/latkun/latkun1712/latkun171200002/92236753-poker-table-.jpg);
+  background-repeat: no-repeat;
+  background-size: 1000px 700px;
+  background-position: left 0 top -100px;
+}
+
+.card.flop-0 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.card.flop-1 {
+  position: relative;
+  top: 0;
+  left: -125px;
+}
+
+.card.flop-2 {
+  position: relative;
+  top: 0;
+  left: -250px;
+}
+
+.card.flop-1.anim-flop, 
+.card.flop-2.anim-flop {
+  transition: all .5s ease;
+  left: 0;
+}
+
+.card-small.player-card,
+.card.flop-3, 
+.card.flop-4 {
+  opacity: 0;
+}
+.card-small.player-card.fade,
+.card.flop-3.anim-turn, 
+.card.flop-4.anim-river {
+  transition: all 1s ease;
+  opacity: 1;
+}
