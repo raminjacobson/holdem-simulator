@@ -107,7 +107,7 @@ module.exports = function Holdem() {
         for (let i = 0; i < cards.length - 4; i++) {
             straighFlush = is5Consecutive(cards, i, i + 4);
             if (straighFlush) {
-                const [value, suit] = deck.getCard(cards[i]);
+                const [value, suit] = deck.getCard(breakdown.sortedCards[i]);
                 const name = deck.VALUE_NAMES[value];
                 if (value === 'A') {
                     message = `Royal Flush, ${deck.SUIT_NAMES[suit]}`;

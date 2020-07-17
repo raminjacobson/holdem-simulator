@@ -13,7 +13,6 @@ export default function Board(props) {
 
     return (
         <>
-            Board Cards: {props.cards.join(',')}
             <div className="felt">
                 {props.cards.map((card, i) => (
                     <img key={card.toString()} className={`card flop-${i}
@@ -21,7 +20,7 @@ export default function Board(props) {
                     ${animationTurn ? ' anim-turn' : ''}
                     ${animationRiver ? ' anim-river' : ''}
                     `
-                } src={Deck.cardImgSrc(card)} alt={card} />
+                    } src={Deck.cardImgSrc(card)} alt={card} />
                 ))}
             </div>
         </>

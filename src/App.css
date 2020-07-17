@@ -53,8 +53,8 @@ button:active {
 }
 
 .card-small {
-  width: 100px;
-  margin-right: 10px;
+  width: 90px;
+  margin-right: 5px;
 }
 
 .felt {
@@ -126,4 +126,15 @@ button:active {
 .fade-1sec {
   transition: all 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);;
   opacity: 1 !important;
+}
+
+.player-cards{
+  padding: 0;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  overflow: auto;
+  z-index: 1;
+  color: yellow;
+  text-align: center;
 }

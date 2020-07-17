@@ -129,8 +129,27 @@ export default function Game() {
         return cards;
     }
 
+    function getCoords(pointCount) {
+        var width = window.innerWidth - 150, height = 600;
+        var rx = 580, ry = 250;
+        var degree = 360 / pointCount;
+        const result = [];
+        for (var i = 0; i < pointCount; i++) {
+            var circlePosition = polarToCartesian(width / 2, height / 2, rx, ry, i * degree);
+            result.push(circlePosition);
+        }
+        function polarToCartesian(centerX, centerY, radiusX, radiusY, angleInDegrees) {
+            var angleInRadians = (angleInDegrees * Math.PI / 180.0);
+            return {
+                x: centerX + (radiusX * Math.cos(angleInRadians)),
+                y: centerY + (radiusY * Math.sin(angleInRadians))
+            };
+        }
+        return result;
+    }
+
     const options = [0];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
         options.push(i + 1);
     }
 
@@ -142,6 +161,9 @@ export default function Game() {
     const flopButton = state.currentRound === ReducerActions.GAME.DEAL_CARDS;
     const turnButton = state.currentRound === ReducerActions.GAME.DEAL_FLOP;
     const riverButton = state.currentRound === ReducerActions.GAME.DEAL_TURN;
+    const dropDownSelectPlayers = state.currentRound === ReducerActions.GAME.NEW_GAME;
+    const coords = getCoords(state.playerCount);
+
     return (
         <>
             <button onClick={handleReset}>Reset</button>
@@ -153,7 +175,7 @@ export default function Game() {
             <hr></hr>
             <center>
                 Number of Players:
-                        <select onChange={handlePlayerCount}>
+                        <select onChange={handlePlayerCount} disabled={!dropDownSelectPlayers}>
                     {
                         options.map(i => (
                             <option value={i} selected={state.playerCount === i ? 'selected' : ''}>{i}</option>
@@ -171,22 +193,19 @@ export default function Game() {
                 </select>
                 <table width="100%" bgcolor="#1C1429">
                     <tr>
-                        {
-                            state.playerCards.map((cards, i) => (
-                                <td width={`${Math.floor(100 / state.playerCount)}%`} bgcolor="#aaa" align="center">
-                                    <Player id={i + 1} cards={cards} />
-                                </td>
-                            ))
-                        }
-                    </tr>
-                    <tr>
-                        <td colspan={state.playerCount}>
+                        <td colspan={state.playerCount} style={{ position: 'relative', height: '750px' }}>
+                            {
+                                state.playerCards.map((cards, i) => (
+                                    <Player id={i + 1} cards={cards} coords={coords[i]} />
+                                ))
+                            }
                             <Board cards={state.boardCards} />
                         </td>
                     </tr>
                 </table>
             </center>
 
+            <hr />
 
             <hr />
             <h1>Remaining Cards ({deck.remainingCards().length}) </h1>
