@@ -141,8 +141,9 @@ button:active {
 
 .player-cards h3 {
   opacity: 0;
-  padding: 5px;
+  margin: 0;
+  padding: 5px 10px;
   position: relative;
-  top: 100px;
+  top: -90px;
   background-color:rgba(0, 0, 0, 0.75);
 }

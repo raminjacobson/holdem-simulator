@@ -130,7 +130,7 @@ export default function Game() {
     }
 
     function getCoords(pointCount) {
-        var width = window.innerWidth - 200, height = 500;
+        var width = window.innerWidth - 200, height = 600;
         var rx = 550, ry = 300;
         var degree = 360 / pointCount;
         const result = [];
