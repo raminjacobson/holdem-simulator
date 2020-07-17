@@ -89,12 +89,16 @@ export default function Game() {
     async function handleAutoDeal() {
         handleReset();
         await sleep(state.delay / 2);
+
         handleDealCards();
         await sleep(state.delay);
+
         handleFlop();
         await sleep(state.delay);
+
         handleTurn();
         await sleep(state.delay);
+
         handleRiver();
         await sleep(1.5 * state.delay);
     }
@@ -118,10 +122,12 @@ export default function Game() {
     for (let i = 0; i < 10; i++) {
         options.push(i + 1);
     }
+
+    const dealButton = (state.currentRound === 'NEW_GAME' || state.currentRound === 'DEAL_RIVER');
     return (
         <>
             <button onClick={handleReset}>Reset</button>
-            <button onClick={handleDealCards} disabled={state.currentRound.DEAL_CARDS} >Deal</button>
+            <button onClick={handleDealCards} disabled={!dealButton}>Deal</button>
             <button onClick={handleFlop} disabled={state.playerCards.length === 0 || state.boardCards.length > 2}>Flop</button>
             <button onClick={handleTurn} disabled={state.boardCards.length !== 3}>Turn</button>
             <button onClick={handleRiver} disabled={state.boardCards.length !== 4}>River</button>
