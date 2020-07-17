@@ -18,11 +18,7 @@ export default function Player(props) {
         const value = holdem.handStrength();
 
         return (
-            <div>
-                {}
-                <br />
-                <h3>{value}</h3>
-            </div>
+            <h3>{value}</h3>
         )
     }
 

@@ -139,6 +139,8 @@ module.exports = function Holdem() {
     function Straight(breakdown) {
         let cards = new Set(breakdown.sortedValues);
         cards = [...cards];
+
+        // other
         for (let i = 0; i < 3; i++) {
             const straight = is5Consecutive(cards, i, i + 4);
             if (straight) {
@@ -148,6 +150,17 @@ module.exports = function Holdem() {
                 return [true, message];
             }
         }
+
+        // wheel
+        if (breakdown.values[0] > 0
+            && breakdown.values[1] > 0
+            && breakdown.values[2] > 0
+            && breakdown.values[3] > 0
+            && breakdown.values[12] > 0
+        ) {
+            return [true, `5-hight Straight`];
+        }
+
         return [false, ''];
     }
 

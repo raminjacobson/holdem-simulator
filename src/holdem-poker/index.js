@@ -33,6 +33,9 @@ handStrength(hand);
 hand = [3, 18, 4, 6, 28, 30, 40]; // => 8 High Straight
 handStrength(hand);
 
+hand = [0, 14, 2, 3, 12, 40, 41];  // => Wheel (5 high straight)
+handStrength(hand);
+
 hand = [9, 22, 35, 2, 3, 4, 50]; // => Three of a Kind, Js
 handStrength(hand);
 
