@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context, ReducerType } from '../store/Store';
+import { Context, ReducerType, ReducerActions } from '../store/Store';
 import Deck from './Deck';
 import Player from './Player';
 import Board from './Board';
@@ -13,7 +13,7 @@ export default function Game() {
         deck.reset();
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'NEW_GAME',
+            type: ReducerActions.GAME.NEW_GAME,
         });
     }
 
@@ -26,12 +26,12 @@ export default function Game() {
         sleep(state.delay / 2);
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'NEW_GAME',
+            type: ReducerActions.GAME.NEW_GAME,
         });
         sleep(state.delay);
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'DEAL_CARDS',
+            type: ReducerActions.GAME.DEAL_CARDS,
             payload: {
                 cards
             }
@@ -42,7 +42,7 @@ export default function Game() {
         const cards = peelCards(3);
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'DEAL_FLOP',
+            type: ReducerActions.GAME.DEAL_FLOP,
             payload: {
                 cards: cards
             }
@@ -53,7 +53,7 @@ export default function Game() {
         const cards = peelCards(1);
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'DEAL_TURN',
+            type: ReducerActions.GAME.DEAL_TURN,
             payload: {
                 cards
             }
@@ -64,7 +64,7 @@ export default function Game() {
         const cards = peelCards(1);
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'DEAL_RIVER',
+            type: ReducerActions.GAME.DEAL_RIVER,
             payload: {
                 cards
             }
@@ -75,7 +75,7 @@ export default function Game() {
         const count = e.target.value;
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'SET_PLAYER_COUNT',
+            type: ReducerActions.GAME.SET_PLAYER_COUNT,
             payload: {
                 count
             }
@@ -86,7 +86,7 @@ export default function Game() {
         const speed = e.target.value;
         dispatch({
             reducer: ReducerType.GAME,
-            type: 'SET_PLAYBACK_SPEED',
+            type: ReducerActions.GAME.SET_PLAYBACK_SPEED,
             payload: {
                 speed
             }
@@ -135,14 +135,20 @@ export default function Game() {
     }
 
     const speed = [500, 750, 1000, 1250, 1500, 2000, 2500, 3000];
-    const dealButton = (state.currentRound === 'NEW_GAME' || state.currentRound === 'DEAL_RIVER');
+    const dealButton = (
+        state.currentRound === ReducerActions.GAME.NEW_GAME
+        || state.currentRound === ReducerActions.GAME.DEAL_RIVER
+    );
+    const flopButton = state.currentRound === ReducerActions.GAME.DEAL_CARDS;
+    const turnButton = state.currentRound === ReducerActions.GAME.DEAL_FLOP;
+    const riverButton = state.currentRound === ReducerActions.GAME.DEAL_TURN;
     return (
         <>
             <button onClick={handleReset}>Reset</button>
             <button onClick={handleDealCards} disabled={!dealButton}>Deal</button>
-            <button onClick={handleFlop} disabled={state.playerCards.length === 0 || state.boardCards.length > 2}>Flop</button>
-            <button onClick={handleTurn} disabled={state.boardCards.length !== 3}>Turn</button>
-            <button onClick={handleRiver} disabled={state.boardCards.length !== 4}>River</button>
+            <button onClick={handleFlop} disabled={!flopButton}>Flop</button>
+            <button onClick={handleTurn} disabled={!turnButton}>Turn</button>
+            <button onClick={handleRiver} disabled={!riverButton}>River</button>
             <button onClick={handleAutoDeal}>Auto Deal</button>
             <hr></hr>
             <center>

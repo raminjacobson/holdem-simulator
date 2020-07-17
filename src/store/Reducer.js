@@ -3,8 +3,8 @@ import { gameReducer, gameActions } from './reducers/gameReducer';
 const ReducerType = {
     GAME: 'GAME',
 }
-const ReducerAction = {
-    ...gameActions
+const ReducerActions = {
+    GAME: { ...gameActions }
 }
 
 
@@ -21,4 +21,4 @@ const Reducer = (state, action) => {
     }
 };
 
-export { Reducer, ReducerType, ReducerAction };
+export { Reducer, ReducerType, ReducerActions };

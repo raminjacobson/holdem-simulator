@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from "react";
-import { Reducer, ReducerType } from './Reducer'
+import { Reducer, ReducerType, ReducerActions } from './Reducer'
 
 const initialState = {
-    currentRound: 'NEw_GAME',
+    currentRound: ReducerActions.GAME.NEW_GAME,
     playerCount: 2,
     boardCards: [],
     playerCards: [],
@@ -23,5 +23,5 @@ const Store = ({ children }) => {
 const Context = createContext(initialState);
 
 
-export { Context, ReducerType };
+export { Context, ReducerType, ReducerActions };
 export default Store;
