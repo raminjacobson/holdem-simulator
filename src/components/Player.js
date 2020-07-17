@@ -17,8 +17,7 @@ export default function Player(props) {
         holdem.setCards(sevenCards);
         let value = holdem.handStrength();
         return (
-            <h3 style={{ opacity: 0, background: '#000', padding: '5px' }}
-                className={`${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</h3>
+            <h3 className={`${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</h3>
         )
     }
 
@@ -31,8 +30,8 @@ export default function Player(props) {
     return (
         <React.Fragment>
             <div class="player-cards" style={{ position: 'absolute', top: props.coords.y, left: props.coords.x }}>
-                {playerCards}
                 {handValue(props.cards)}
+                {playerCards}
             </div>
         </React.Fragment>
     );
