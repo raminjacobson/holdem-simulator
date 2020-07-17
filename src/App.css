@@ -49,15 +49,17 @@ button:active {
 
 .card {
   width: 125px;
+  margin-right: 10px;
 }
 
 .card-small {
   width: 100px;
+  margin-right: 10px;
 }
 
 .felt {
   position: relative;
-  padding-left: 200px;
+  padding-left: 160px;
   margin: 0 auto;
   width: 800px;
   height: 500px;

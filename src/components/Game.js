@@ -164,7 +164,7 @@ export default function Game() {
                     }
                 </select>
                 <table width="100%" bgcolor="#1C1429">
-                    <tr height="200">
+                    <tr>
                         {
                             state.playerCards.map((cards, i) => (
                                 <td width={`${Math.floor(100 / state.playerCount)}%`} bgcolor="#aaa" align="center">
