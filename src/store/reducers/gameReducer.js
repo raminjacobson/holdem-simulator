@@ -5,6 +5,7 @@ const gameActions = {
     DEAL_TURN: 'DEAL_TURN',
     DEAL_RIVER: 'DEAL_RIVER',
     SET_PLAYER_COUNT: 'SET_PLAYER_COUNT',
+    SET_PLAYBACK_SPEED: 'SET_PLAYBACK_SPEED'
 }
 
 const gameReducer = (state, { type, payload }) => {
@@ -49,36 +50,20 @@ const gameReducer = (state, { type, payload }) => {
                 }
             }
 
-        case gameActions.SET_PLAYER_COUNT: {
+        case gameActions.SET_PLAYER_COUNT:
+            {
+                return {
+                    ...state,
+                    playerCount: payload.count
+                }
+            }
+
+        case gameActions.SET_PLAYBACK_SPEED:
             return {
                 ...state,
-                playerCount: payload.count
+                delay: payload.speed
             }
-        }
-        //     return {
-        //     return {
 
-        // case 'SET_POSTS':
-        //     return {
-        //         ...state,
-        //         posts: action.payload
-        //     };
-        // case 'ADD_POST':
-        //     action.payload.id = state.posts.length + 1;
-        //     return {
-        //         ...state,
-        //         posts: state.posts.concat(action.payload)
-        //     };
-        // case 'REMOVE_POST':
-        //     return {
-        //         ...state,
-        //         posts: state.posts.filter(post => post.id !== action.payload)
-        //     };
-        // case 'SET_ERROR':
-        //     return {
-        //         ...state,
-        //         error: action.payload
-        //     };
         default:
             return state;
     }

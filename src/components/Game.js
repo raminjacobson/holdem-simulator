@@ -82,6 +82,17 @@ export default function Game() {
         });
     }
 
+    const handleSpeedChange = (e) => {
+        const speed = e.target.value;
+        dispatch({
+            reducer: ReducerType.GAME,
+            type: 'SET_PLAYBACK_SPEED',
+            payload: {
+                speed
+            }
+        });
+    }
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(() => { resolve() }, ms));
     }
@@ -123,6 +134,7 @@ export default function Game() {
         options.push(i + 1);
     }
 
+    const speed = [500, 750, 1000, 1250, 1500, 2000, 2500, 3000];
     const dealButton = (state.currentRound === 'NEW_GAME' || state.currentRound === 'DEAL_RIVER');
     return (
         <>
@@ -141,6 +153,15 @@ export default function Game() {
                             {
                                 options.map(i => (
                                     <option value={i} selected={state.playerCount === i ? 'selected' : ''}>{i}</option>
+                                ))
+                            }
+                        </select>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        Speed:
+                        <select onChange={handleSpeedChange}>
+                            {
+                                speed.map(i => (
+                                    <option value={i} selected={state.delay === i ? 'selected' : ''}>{i}</option>
                                 ))
                             }
                         </select>
