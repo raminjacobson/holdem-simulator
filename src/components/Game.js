@@ -130,7 +130,8 @@ export default function Game() {
     }
 
     function getCoords(pointCount) {
-        var width = window.innerWidth - 200, height = 600;
+        var width = document.documentElement.clientWidth - 200,
+            height = document.documentElement.clientHeight * .7;
         var rx = 550, ry = 300;
         var degree = 360 / pointCount;
         const result = [];
@@ -200,14 +201,12 @@ export default function Game() {
                                     <Player id={i + 1} cards={cards} coords={coords[i]} />
                                 ))
                             }
+
                             <Board cards={state.boardCards} />
                         </td>
                     </tr>
                 </table>
             </center>
-
-            <hr />
-
             <hr />
             <h1>Remaining Cards ({deck.remainingCards().length}) </h1>
             {deck.remainingCards()}
