@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Table from './components/Table';
+import Game from './components/Game';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         Poker Hand
       </header>
-      <Table />
+      <Game />
     </div>
   );
 }
