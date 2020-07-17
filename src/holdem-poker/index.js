@@ -17,8 +17,12 @@ function handStrength(hand) {
 hand = [51, 50, 49, 48, 47, 3, 7]; // => Spades Royal Flush
 handStrength(hand);
 
-hand = [46, 50, 49, 48, 47, 3, 7]; // => Spades K High Flush
+hand = [46, 50, 49, 48, 47, 3, 7]; // => Spades K High Straight Flush
 handStrength(hand);
+
+hand = [12, 50, 30, 3, 2, 1, 0]; // => Spades 5 High Straight Flush
+handStrength(hand);
+
 
 hand = [0, 13, 26, 39, 40, 51, 6]; // => Four of a Kind, 2s
 handStrength(hand);

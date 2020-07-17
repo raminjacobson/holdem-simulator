@@ -87,20 +87,37 @@ module.exports = function Holdem() {
     function isStraightFlush(breakdown) {
         let message = '';
         let straighFlush = false;
-        const cards = breakdown.sortedCards;
-        for (let i = 0; i < 3; i++) {
+
+        let cards = breakdown.sortedCards;
+        for (let [, arr] of Object.entries(breakdown.suits)) {
+            if (arr.length >= 5) {
+                cards = arr;
+                // adjust for A being counted on the lower end of the straight
+                if (cards.map(x => x % 13)[0] === 12) {
+                    cards.push(cards[0] - 13);
+                }
+                break;
+            }
+        }
+
+        if (!cards) {
+            return [false, ''];
+        }
+
+        for (let i = 0; i < cards.length - 4; i++) {
             straighFlush = is5Consecutive(cards, i, i + 4);
             if (straighFlush) {
                 const [value, suit] = deck.getCard(cards[i]);
                 const name = deck.VALUE_NAMES[value];
                 if (value === 'A') {
-                    message = `${deck.SUIT_NAMES[suit]} Royal Flush`;
+                    message = `Royal Flush, ${deck.SUIT_NAMES[suit]}`;
                 } else {
-                    message = `${deck.SUIT_NAMES[suit]} ${name}-high Straight Flush`;
+                    message = `${name}-high Straight Flush, ${deck.SUIT_NAMES[suit]}`;
                 }
                 break;
             }
         }
+
         const result = [straighFlush, message];
         return result;
     }
@@ -130,7 +147,7 @@ module.exports = function Holdem() {
             if (breakdown.suits[suit].length >= 5) {
                 let highCard = arrayMax(breakdown.suits[suit]);
                 const name = deck.VALUE_NAMES[deck.getCard(highCard)[0]];
-                return [true, `${name}-high ${deck.SUIT_NAMES[suit]} Flush`];
+                return [true, `${name}-high Flush, ${deck.SUIT_NAMES[suit]}`];
             }
         }
         return [false, ''];

@@ -22,7 +22,7 @@ export default function Player(props) {
         )
     }
 
-    const p = props.cards.map(card =>
+    const playerCards = props.cards.map(card =>
         <img key={card.toString()} className={`card-small player-card${animation ? ' fade' : ''}`}
             src={Deck.cardImgSrc(card)} alt={card} />
     )
@@ -31,7 +31,7 @@ export default function Player(props) {
     return (
         <React.Fragment>
             <h1>Player {props.id}</h1>
-            {p}
+            {playerCards}
             {handValue(props.cards)}
         </React.Fragment>
     );
