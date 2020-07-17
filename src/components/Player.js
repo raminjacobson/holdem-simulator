@@ -11,14 +11,14 @@ export default function Player(props) {
         setAnimation(props.cards.length === 2);
     });
 
+    const holdem = new Holdem();
     function handValue(cards) {
-        const holdem = new Holdem();
         const sevenCards = cards.concat(state.boardCards);
         holdem.setCards(sevenCards);
-        const value = holdem.handStrength();
-
+        let value = holdem.handStrength();
         return (
-            <h3>{value}</h3>
+            <h3 style={{ opacity: 0 }}
+                className={`${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</h3>
         )
     }
 

@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 10vh;
+  height: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +41,10 @@ button {
   font: 18px arial;
   font-weight: bold;
   padding: 15px 50px;
+  cursor: pointer;
+}
+button:active {
+  background-color: orange;
 }
 
 .card {
@@ -57,9 +61,10 @@ button {
   margin: 0 auto;
   width: 800px;
   height: 500px;
-  line-height: 700px;
+  line-height: 600px;
   vertical-align: middle;
-  background: url(https://previews.123rf.com/images/latkun/latkun1712/latkun171200002/92236753-poker-table-.jpg);
+  /* background: url(https://previews.123rf.com/images/latkun/latkun1712/latkun171200002/92236753-poker-table-.jpg); */
+  background: url(https://thumbs.dreamstime.com/z/realistic-poker-table-d-rendered-scene-48173892.jpg);
   background-repeat: no-repeat;
   background-size: 1000px 700px;
   background-position: left 0 top -100px;
@@ -97,6 +102,26 @@ button {
 .card-small.player-card.fade,
 .card.flop-3.anim-turn, 
 .card.flop-4.anim-river {
-  transition: all 1s ease;
+  transition: all .5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   opacity: 1;
+  top: 0;
+  left: 0;
+}
+
+
+.card.flop-3 {
+  position: relative;
+  top: -200px;
+  left: -150px;
+}
+
+.card.flop-4 {
+  position: relative;
+  top: -200px;
+  left: -250px;
+}
+
+.fade-1sec {
+  transition: all 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);;
+  opacity: 1 !important;
 }

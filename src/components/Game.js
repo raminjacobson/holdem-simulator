@@ -146,30 +146,28 @@ export default function Game() {
             <button onClick={handleAutoDeal}>Auto Deal</button>
             <hr></hr>
             <center>
-                <table>
-                    <tr>
-                        Number of Players:
+                Number of Players:
                         <select onChange={handlePlayerCount}>
-                            {
-                                options.map(i => (
-                                    <option value={i} selected={state.playerCount === i ? 'selected' : ''}>{i}</option>
-                                ))
-                            }
-                        </select>
+                    {
+                        options.map(i => (
+                            <option value={i} selected={state.playerCount === i ? 'selected' : ''}>{i}</option>
+                        ))
+                    }
+                </select>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         Speed:
                         <select onChange={handleSpeedChange}>
-                            {
-                                speed.map(i => (
-                                    <option value={i} selected={state.delay === i ? 'selected' : ''}>{i}</option>
-                                ))
-                            }
-                        </select>
-                    </tr>
-                    <tr>
+                    {
+                        speed.map(i => (
+                            <option value={i} selected={state.delay === i ? 'selected' : ''}>{i}</option>
+                        ))
+                    }
+                </select>
+                <table width="100%" bgcolor="#1C1429">
+                    <tr height="200">
                         {
                             state.playerCards.map((cards, i) => (
-                                <td width={`${Math.floor(100 / state.playerCount)}%`} height="200" bgcolor="#aaa" align="center">
+                                <td width={`${Math.floor(100 / state.playerCount)}%`} bgcolor="#aaa" align="center">
                                     <Player id={i + 1} cards={cards} />
                                 </td>
                             ))
