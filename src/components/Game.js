@@ -201,7 +201,6 @@ export default function Game() {
                                     <Player id={i + 1} cards={cards} coords={coords[i]} />
                                 ))
                             }
-
                             <Board cards={state.boardCards} />
                         </td>
                     </tr>

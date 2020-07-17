@@ -59,17 +59,18 @@ button:active {
 
 .felt {
   position: relative;
-  padding-left: 150px;
+  padding: 75px 150px;
+  box-sizing: border-box;
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
   height: 500px;
-  line-height: 650px;
+  line-height: 500px;
   vertical-align: middle;
   /* background: url(https://previews.123rf.com/images/latkun/latkun1712/latkun171200002/92236753-poker-table-.jpg); */
   background: url(https://thumbs.dreamstime.com/z/realistic-poker-table-d-rendered-scene-48173892.jpg) 800px 500px;
   background-repeat: no-repeat;
   background-size: 1000px 700px;
-  background-position: left -20px top -70px
+  background-position: left 0 top -70px
 }
 
 .card.flop-0 {
