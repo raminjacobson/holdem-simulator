@@ -130,8 +130,8 @@ export default function Game() {
     }
 
     function getCoords(pointCount) {
-        var width = window.innerWidth - 150, height = 600;
-        var rx = 580, ry = 250;
+        var width = 1500, height = 600;
+        var rx = 550, ry = 300;
         var degree = 360 / pointCount;
         const result = [];
         for (var i = 0; i < pointCount; i++) {
@@ -166,14 +166,15 @@ export default function Game() {
 
     return (
         <>
-            <button onClick={handleReset}>Reset</button>
-            <button onClick={handleDealCards} disabled={!dealButton}>Deal</button>
-            <button onClick={handleFlop} disabled={!flopButton}>Flop</button>
-            <button onClick={handleTurn} disabled={!turnButton}>Turn</button>
-            <button onClick={handleRiver} disabled={!riverButton}>River</button>
-            <button onClick={handleAutoDeal}>Auto Deal</button>
-            <hr></hr>
             <center>
+                <button onClick={handleReset}>Reset</button>
+                <button onClick={handleDealCards} disabled={!dealButton}>Deal</button>
+                <button onClick={handleFlop} disabled={!flopButton}>Flop</button>
+                <button onClick={handleTurn} disabled={!turnButton}>Turn</button>
+                <button onClick={handleRiver} disabled={!riverButton}>River</button>
+                <button onClick={handleAutoDeal}>Auto Deal</button>
+
+
                 Number of Players:
                         <select onChange={handlePlayerCount} disabled={!dropDownSelectPlayers}>
                     {
@@ -191,9 +192,9 @@ export default function Game() {
                         ))
                     }
                 </select>
-                <table width="100%" bgcolor="#1C1429">
+                <table width="100%" bgcolor="#2C2537" border="1" cellSpacing="1">
                     <tr>
-                        <td colspan={state.playerCount} style={{ position: 'relative', height: '750px' }}>
+                        <td style={{ position: 'relative', height: '750px', width: '800px' }}>
                             {
                                 state.playerCards.map((cards, i) => (
                                     <Player id={i + 1} cards={cards} coords={coords[i]} />
