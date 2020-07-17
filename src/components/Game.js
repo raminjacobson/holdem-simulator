@@ -136,8 +136,8 @@ export default function Game() {
         var degree = 360 / pointCount;
         const result = [];
         for (var i = 0; i < pointCount; i++) {
-            var circlePosition = polarToCartesian(width / 2, height / 2, rx, ry, i * degree);
-            result.push(circlePosition);
+            var point = polarToCartesian(width / 2, height / 2, rx, ry, i * degree);
+            result.push(point);
         }
         function polarToCartesian(centerX, centerY, radiusX, radiusY, angleInDegrees) {
             var angleInRadians = (angleInDegrees * Math.PI / 180.0);
@@ -185,7 +185,7 @@ export default function Game() {
                     }
                 </select>
                         &nbsp; &nbsp; &nbsp; &nbsp;
-                        Speed:
+                        Speed (ms):
                         <select onChange={handleSpeedChange}>
                     {
                         speed.map(i => (

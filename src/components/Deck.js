@@ -5,9 +5,9 @@ export default function Deck() {
     const newDeck = Array(count).fill(0).map((v, i) => i);
     let [deck, setDeck] = useState(newDeck);
 
-    const reset = function() {
+    const reset = function () {
         deck.splice(0, deck.length);;
-        for(let i = 0; i < count; i++) { deck.push(i); }
+        for (let i = 0; i < count; i++) { deck.push(i); }
         setDeck(deck);
     }
 
@@ -42,6 +42,6 @@ function getCard(value) {
 
 Deck.cardImgSrc = function (value) {
     const card = getCard(value).toLowerCase();
-    const url = `https://estopoker.com/images/deck/classic/${card}.svg`;
+    const url = `/images/${card}.svg`;
     return url;
 }
