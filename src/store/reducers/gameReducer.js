@@ -1,3 +1,5 @@
+import Deck from "../../holdem-poker/Deck";
+
 const gameActions = {
     NEW_GAME: 'NEW_GAME',
     DEAL_CARDS: 'DEAL_CARDS',
@@ -12,6 +14,9 @@ const gameReducer = (state, { type, payload }) => {
     switch (type) {
         case gameActions.NEW_GAME:
             {
+                const deck = new Deck();
+                deck.shuffle();
+                state.deck = deck;
                 return {
                     ...state,
                     currentRound: gameActions.NEW_GAME,
@@ -24,7 +29,8 @@ const gameReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 currentRound: gameActions.DEAL_CARDS,
-                playerCards: payload.cards
+                playerCards: payload.cards,
+                deck: payload.deck
             }
 
         case gameActions.DEAL_FLOP:

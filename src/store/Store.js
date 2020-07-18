@@ -1,5 +1,9 @@
 import React, { createContext, useReducer } from "react";
-import { Reducer, ReducerType, ReducerActions } from './Reducer'
+import { Reducer, ReducerType, ReducerActions } from './Reducer';
+import Deck from '../holdem-poker/Deck';
+
+const deck = new Deck();
+deck.shuffle();
 
 const initialState = {
     currentRound: ReducerActions.GAME.NEW_GAME,
@@ -7,6 +11,7 @@ const initialState = {
     boardCards: [],
     playerCards: [],
     history: [],
+    deck: deck,
     delay: 1500,
     error: null,
 };

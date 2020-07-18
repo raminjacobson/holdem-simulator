@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
-import { Context, ReducerType } from '../store/Store';
-import Deck from './Deck';
+import { Context } from '../store/Store';
 import Holdem from '../holdem-poker/Holdem';
 
 export default function Player(props) {
-    const [state, dispatch] = useContext(Context);
+    const [state] = useContext(Context);
 
     const [animation, setAnimation] = React.useState(false);
     React.useEffect(() => {
@@ -17,19 +16,19 @@ export default function Player(props) {
         holdem.setCards(sevenCards);
         let value = holdem.handStrength();
         return (
-            <h3 className={`${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</h3>
+            <div className={`value ${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</div>
         )
     }
 
     const playerCards = props.cards.map(card =>
         <img key={card.toString()} className={`card-small player-card${animation ? ' fade' : ''}`}
-            src={Deck.cardImgSrc(card)} alt={card} />
+            src={state.deck.cardImgUrl(card)} alt={card} />
     )
-
 
     return (
         <React.Fragment>
-            <div class="player-cards" style={{ position: 'absolute', top: props.coords.y, left: props.coords.x }}>
+            <div class="player-cards"
+                style={{ position: 'absolute', top: props.coords.y, left: props.coords.x }}>
                 {playerCards}
                 {handValue(props.cards)}
             </div>

@@ -1,7 +1,9 @@
-import React from 'react';
-import Deck from './Deck'
+import React, { useContext } from 'react';
+import { Context } from '../store/Store';
 
 export default function Board(props) {
+    const [state] = useContext(Context);
+
     const [animationFlop, setAnimationFlop] = React.useState(false);
     const [animationTurn, setAnimationTurn] = React.useState(false);
     const [animationRiver, setAnimationRiver] = React.useState(false);
@@ -20,7 +22,7 @@ export default function Board(props) {
                     ${animationTurn ? ' anim-turn' : ''}
                     ${animationRiver ? ' anim-river' : ''}
                     `
-                    } src={Deck.cardImgSrc(card)} alt={card} />
+                    } src={state.deck.cardImgUrl(card)} alt={card} />
                 ))}
             </div>
         </>

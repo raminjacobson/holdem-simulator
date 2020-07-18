@@ -49,12 +49,14 @@ button:active {
 
 .card {
   width: 125px;
-  margin-right: 10px;
+  margin: 0 5px;
+  top:0;
+  left: 0;
 }
 
 .card-small {
-  width: 95px;
-  margin-right: 5px;
+  width: 100px;
+  margin: 0 2px;
 }
 
 .felt {
@@ -130,6 +132,7 @@ button:active {
 }
 
 .player-cards{
+  width: 210px;
   padding: 0;
   top: 0;
   left: 0;
@@ -140,11 +143,14 @@ button:active {
   text-align: center;
 }
 
-.player-cards h3 {
+.player-cards .value {
   opacity: 0;
   margin: 0;
-  padding: 5px 10px;
-  position: relative;
-  top: -90px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 35%;
+  width: 100%;
   background-color:rgba(0, 0, 0, 0.75);
+  font-weight: bold;
 }

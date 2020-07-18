@@ -1,8 +1,10 @@
-var Deck = require('./Deck');
+// var Deck = require('./Deck');
+import Deck from './Deck';
+
 /**
  * Returns a string indicating the hand strength.
  */
-module.exports = function Holdem() {
+export default function Holdem() {
     const arrayMax = (arr) => arr.reduce((a, b) => Math.max(a, b));
     const deck = new Deck();
 

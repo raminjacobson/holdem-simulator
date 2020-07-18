@@ -1,6 +1,5 @@
-module.exports = function Deck() {
+function Deck() {
     const count = 52;
-    const shuffleCount = 30;
     const deck = Array(count).fill(0).map((v, i) => i);
 
     this.SUITS = ['c', 'd', 'h', 's'];
@@ -33,9 +32,9 @@ module.exports = function Deck() {
             arr[i] = arr[j];
             arr[j] = temp;
         }
-        function getRandomNumber() {
-            return Math.floor(Math.random() * 52);
-        }
+        const getRandomNumber = () => Math.floor(Math.random() * 52);
+        const max = 100, min = 75;
+        const shuffleCount = Math.floor(Math.random() * (max - min)) + min;
         for (let i = 0; i < shuffleCount; i++) {
             const p1 = getRandomNumber();
             const p2 = getRandomNumber();
@@ -47,10 +46,7 @@ module.exports = function Deck() {
         return deck.splice(deck.length - count, count);
     }
 
-    this.remainingCards = function () {
-        return deck;
-    }
-
+    this.remainingCards = deck;
 
     this.getCard = function (index) {
         const suit = this.SUITS[Math.floor(index / 13)];
@@ -62,7 +58,9 @@ module.exports = function Deck() {
          * return: e.g. [2, c]
          */
         const card = this.getCard(value).reverse().join('').toLowerCase();
-        const url = `https://estopoker.com/images/deck/classic/${card}.svg`;
+        // const url = `https://estopoker.com/images/deck/classic/${card}.svg`;
+        const url = `/images/${card}.svg`;
         return url;
     }
 }
+export default Deck;

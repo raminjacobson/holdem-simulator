@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
 import { Context, ReducerType, ReducerActions } from '../store/Store';
-import Deck from './Deck';
 import Player from './Player';
 import Board from './Board';
 
 export default function Game() {
-    const deck = new Deck();
-
     const [state, dispatch] = useContext(Context);
 
     function handleReset() {
-        deck.reset();
+        sleep(state.delay / 2);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.NEW_GAME,
@@ -18,28 +15,25 @@ export default function Game() {
     }
 
     function handleDealCards() {
+        handleReset();
+
+        sleep(state.delay);
         const cards = [];
         for (let i = 0; i < state.playerCount; i++) {
-            let card = dealCards();
-            cards[i] = card;
+            cards[i] = state.deck.peelCards(2);
         }
-        sleep(state.delay / 2);
-        dispatch({
-            reducer: ReducerType.GAME,
-            type: ReducerActions.GAME.NEW_GAME,
-        });
-        sleep(state.delay);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.DEAL_CARDS,
             payload: {
-                cards
+                cards,
+                deck: state.deck
             }
         });
     }
 
     function handleFlop() {
-        const cards = peelCards(3);
+        const cards = state.deck.peelCards(3);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.DEAL_FLOP,
@@ -50,7 +44,7 @@ export default function Game() {
     }
 
     function handleTurn() {
-        const cards = peelCards(1);
+        const cards = state.deck.peelCards(1);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.DEAL_TURN,
@@ -61,7 +55,7 @@ export default function Game() {
     }
 
     function handleRiver() {
-        const cards = peelCards(1);
+        const cards = state.deck.peelCards(1);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.DEAL_RIVER,
@@ -105,33 +99,18 @@ export default function Game() {
         await sleep(state.delay);
 
         handleFlop();
-        await sleep(state.delay);
+        await sleep(1.5 * state.delay);
 
         handleTurn();
-        await sleep(state.delay);
+        await sleep(1.5 * state.delay);
 
         handleRiver();
         await sleep(1.5 * state.delay);
     }
 
-    function dealCards() {
-        const cards = [];
-        cards.push(deck.selectCard());
-        cards.push(deck.selectCard());
-        return cards;
-    }
-    function peelCards(count) {
-        const cards = [];
-        for (let i = 0; i < count; i++) {
-            const value = deck.selectCard();
-            cards.push(value);
-        }
-        return cards;
-    }
-
     function getCoords(pointCount) {
-        var width = document.documentElement.clientWidth - 200,
-            height = document.documentElement.clientHeight * .7;
+        var width = window.innerWidth - 220,
+            height = window.innerHeight * .7;
         var rx = 550, ry = 300;
         var degree = 360 / pointCount;
         const result = [];
@@ -141,9 +120,11 @@ export default function Game() {
         }
         function polarToCartesian(centerX, centerY, radiusX, radiusY, angleInDegrees) {
             var angleInRadians = (angleInDegrees * Math.PI / 180.0);
+            const x = centerX + (radiusX * Math.cos(angleInRadians));
+            const y = centerY + (radiusY * Math.sin(angleInRadians));
             return {
-                x: centerX + (radiusX * Math.cos(angleInRadians)),
-                y: centerY + (radiusY * Math.sin(angleInRadians))
+                x: Math.floor(x),
+                y: Math.floor(y)
             };
         }
         return result;
@@ -162,6 +143,10 @@ export default function Game() {
     const flopButton = state.currentRound === ReducerActions.GAME.DEAL_CARDS;
     const turnButton = state.currentRound === ReducerActions.GAME.DEAL_FLOP;
     const riverButton = state.currentRound === ReducerActions.GAME.DEAL_TURN;
+    const autoDealButton = (
+        state.currentRound === ReducerActions.GAME.NEW_GAME
+        || state.currentRound === ReducerActions.GAME.DEAL_RIVER
+    );
     const dropDownSelectPlayers = state.currentRound === ReducerActions.GAME.NEW_GAME;
     const coords = getCoords(state.playerCount);
 
@@ -173,7 +158,7 @@ export default function Game() {
                 <button onClick={handleFlop} disabled={!flopButton}>Flop</button>
                 <button onClick={handleTurn} disabled={!turnButton}>Turn</button>
                 <button onClick={handleRiver} disabled={!riverButton}>River</button>
-                <button onClick={handleAutoDeal}>Auto Deal</button>
+                <button onClick={handleAutoDeal} disabled={!autoDealButton}>Auto Deal</button>
 
 
                 Number of Players:
@@ -196,19 +181,24 @@ export default function Game() {
                 <table width="100%" bgcolor="#2C2537" border="1" cellSpacing="1">
                     <tr>
                         <td style={{ position: 'relative', height: '750px', width: '800px' }}>
+                            <Board cards={state.boardCards} />
                             {
                                 state.playerCards.map((cards, i) => (
                                     <Player id={i + 1} cards={cards} coords={coords[i]} />
                                 ))
                             }
-                            <Board cards={state.boardCards} />
                         </td>
                     </tr>
                 </table>
             </center>
             <hr />
-            <h1>Remaining Cards ({deck.remainingCards().length}) </h1>
-            {deck.remainingCards()}
+            <h1>Remaining Cards ({state.deck.remainingCards.length}) </h1>
+            {
+                state.deck.remainingCards.map(card => (
+                    <img key={card.toString()} className="card-small"
+                        src={state.deck.cardImgUrl(card)} alt={card} />
+                ))
+            }
         </>
     )
 }
