@@ -13,6 +13,10 @@ const initialState = {
     history: [],
     deck: deck,
     delay: 1500,
+    shortDeck: {
+        fromValue: 0,
+        toValue: 12
+    },
     error: null,
 };
 

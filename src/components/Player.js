@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/Store';
-import Holdem from '../holdem-poker/Holdem';
+import Deck from '../holdem-poker/Deck';
+import PokerSolver from 'pokersolver';
+
 
 export default function Player(props) {
     const [state] = useContext(Context);
@@ -10,11 +12,19 @@ export default function Player(props) {
         setAnimation(props.cards.length === 2);
     });
 
-    const holdem = new Holdem();
     function handValue(cards) {
         const sevenCards = cards.concat(state.boardCards);
-        holdem.setCards(sevenCards);
-        let value = holdem.handStrength();
+        let value = "";
+        const deck = new Deck();
+        const C = sevenCards.map(x => {
+            const card = deck.getCard(x);
+            return `${card[0].toUpperCase().replace('10', 'T')}${card[1]}`;
+        });
+        if (sevenCards.length === 7) {
+            var hand1 = PokerSolver.Hand.solve(C);
+            value = hand1.descr;
+        }
+
         return (
             <div className={`value ${state.currentRound === 'DEAL_RIVER' ? 'fade-1sec' : ''}`}>{value}</div>
         )

@@ -6,11 +6,25 @@ import Board from './Board';
 export default function Game() {
     const [state, dispatch] = useContext(Context);
 
+    var getQueryString = function (field, url) {
+        var href = url ? url : window.location.href;
+        var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+        var string = reg.exec(href);
+        return string ? string[1] : null;
+    };
     function handleReset() {
+        const from = getQueryString('from') || 8;
+        const to = getQueryString('to') || 12;
         sleep(state.delay / 2);
         dispatch({
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.NEW_GAME,
+            payload: {
+                shortDeck: {
+                    fromValue: from,
+                    toValue: to
+                }
+            }
         });
     }
 

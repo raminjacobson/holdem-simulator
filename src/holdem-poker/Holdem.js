@@ -135,10 +135,15 @@ export default function Holdem() {
 
 
     function FullHouse(breakdown) {
-        if (breakdown.trips.length > 0 && breakdown.pairs.length > 0) {
+        if (breakdown.trips.length > 0) {
             const name1 = deck.VALUE_NAMES[deck.getCard(breakdown.trips[0])[0]];
-            const name2 = deck.VALUE_NAMES[deck.getCard(breakdown.pairs[0])[0]];
-            return [true, `Full House, ${name1}s and ${name2}s`];
+            if (breakdown.pairs.length > 0) {
+                const name2 = deck.VALUE_NAMES[deck.getCard(breakdown.pairs[0])[0]];
+                return [true, `Full House, ${name1}s and ${name2}s`];
+            } else if (breakdown.trips.length === 2) {
+                const name2 = deck.VALUE_NAMES[deck.getCard(breakdown.trips[1])[0]];
+                return [true, `Full House, ${name1}s and ${name2}s`];
+            }
         }
         return [false, ''];
     }

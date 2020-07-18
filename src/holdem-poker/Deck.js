@@ -26,6 +26,23 @@ function Deck() {
         'A': 'Ace'
     };
 
+
+
+    this.convertToShortDeck = (fromValue = 0, toValue = 12) => {
+        const shortDeck = [];
+        for (let i = 0; i < deck.length; ++i) {
+            if (
+                (i % 13 >= fromValue && i % 13 <= toValue)
+            ) {
+                shortDeck.push(i);
+            }
+        }
+        deck.splice(0, deck.length);
+        shortDeck.forEach(i => {
+            deck.push(i);
+        });
+    }
+
     /**  
      * https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb 
      */
