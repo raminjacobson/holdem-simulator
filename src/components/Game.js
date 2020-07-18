@@ -13,8 +13,10 @@ export default function Game() {
         return string ? string[1] : null;
     };
     function handleReset() {
-        const from = getQueryString('from') || 8;
-        const to = getQueryString('to') || 12;
+        let from = getQueryString('from') || 0;
+        let to = getQueryString('to') || 12;
+        from = Number(from);
+        to = Number(to);
         sleep(state.delay / 2);
         dispatch({
             reducer: ReducerType.GAME,
