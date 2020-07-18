@@ -15,9 +15,6 @@ export default function Game() {
     }
 
     function handleDealCards() {
-        handleReset();
-
-        sleep(state.delay);
         const cards = [];
         for (let i = 0; i < state.playerCount; i++) {
             cards[i] = state.deck.peelCards(2);

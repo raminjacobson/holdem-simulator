@@ -26,20 +26,17 @@ function Deck() {
         'A': 'Ace'
     };
 
-    this.shuffle = () => {
-        function swap(arr, i, j) {
-            const temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+    /**  
+     * https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb 
+     */
+    this.shuffle = async () => {
+        for (let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * i)
+            const temp = deck[i]
+            deck[i] = deck[j]
+            deck[j] = temp
         }
-        const getRandomNumber = () => Math.floor(Math.random() * 52);
-        const max = 100, min = 75;
-        const shuffleCount = Math.floor(Math.random() * (max - min)) + min;
-        for (let i = 0; i < shuffleCount; i++) {
-            const p1 = getRandomNumber();
-            const p2 = getRandomNumber();
-            swap(deck, p1, p2);
-        }
+        return this;
     }
 
     this.peelCards = (count) => {
