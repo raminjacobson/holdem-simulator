@@ -16,7 +16,7 @@ const gameReducer = (state, { type, payload }) => {
         case gameActions.NEW_GAME:
             {
                 const deck = new Deck();
-                deck.convertToShortDeck(payload.shortDeck.fromValue, payload.shortDeck.toValue);
+                deck.convertToShortDeck(payload.deckRange.fromValue, payload.deckRange.toValue);
                 deck.shuffle();
                 state.deck = deck;
                 return {

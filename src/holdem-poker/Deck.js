@@ -27,18 +27,18 @@ function Deck() {
     };
 
     this.convertToShortDeck = (fromValue = 0, toValue = 12) => {
-        const shortDeck = [];
+        const deckRange = [];
         fromValue = fromValue === 12 ? -1 : fromValue; // A
         for (let i = 0; i < deck.length; ++i) {
             if (
                 (fromValue === -1 && i % 13 === 12) ||
                 (i % 13 >= fromValue && i % 13 <= toValue)
             ) {
-                shortDeck.push(i);
+                deckRange.push(i);
             }
         }
         deck.splice(0, deck.length);
-        shortDeck.forEach(i => {
+        deckRange.forEach(i => {
             deck.push(i);
         });
     }

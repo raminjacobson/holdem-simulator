@@ -14,7 +14,7 @@ const initialState = {
     history: [],
     playerCards: [],
     playerCount: 2,
-    shortDeck: { fromValue: 0, toValue: 12 },
+    deckRange: { fromValue: 0, toValue: 12 },
     error: null,
 };
 

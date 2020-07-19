@@ -28,7 +28,7 @@ export default function Game() {
             reducer: ReducerType.GAME,
             type: ReducerActions.GAME.NEW_GAME,
             payload: {
-                shortDeck: {
+                deckRange: {
                     fromValue: from,
                     toValue: to
                 }
