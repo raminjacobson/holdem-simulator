@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Context, ReducerType, ReducerActions } from '../store/Store';
 import Player from './Player';
 import Board from './Board';
+import DateRangePicker from './DeckRangePicker';
 
 export default function Game() {
     const [state, dispatch] = useContext(Context);
@@ -127,8 +128,8 @@ export default function Game() {
 
     function getCoords(pointCount) {
         var width = window.innerWidth - 220,
-            height = window.innerHeight * .7;
-        var rx = 550, ry = 300;
+            height = window.innerHeight;
+        var rx = 600, ry = 325;
         var degree = 360 / pointCount;
         const result = [];
         for (var i = 0; i < pointCount; i++) {
@@ -177,7 +178,6 @@ export default function Game() {
                 <button onClick={handleRiver} disabled={!riverButton}>River</button>
                 <button onClick={handleAutoDeal} disabled={!autoDealButton}>Auto Deal</button>
 
-
                 Number of Players:
                         <select onChange={handlePlayerCount} disabled={!dropDownSelectPlayers}>
                     {
@@ -195,18 +195,16 @@ export default function Game() {
                         ))
                     }
                 </select>
-                <table width="100%" bgcolor="#2C2537" border="1" cellSpacing="1">
-                    <tr>
-                        <td style={{ position: 'relative', height: '750px', width: '800px' }}>
-                            <Board cards={state.boardCards} />
-                            {
-                                state.playerCards.map((cards, i) => (
-                                    <Player id={i + 1} cards={cards} coords={coords[i]} />
-                                ))
-                            }
-                        </td>
-                    </tr>
-                </table>
+
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <DateRangePicker />
+
+                <Board cards={state.boardCards} />
+                {
+                    state.playerCards.map((cards, i) => (
+                        <Player id={i + 1} cards={cards} coords={coords[i]} />
+                    ))
+                }
             </center>
             <hr />
             <h1>Remaining Cards ({state.deck.remainingCards.length}) </h1>

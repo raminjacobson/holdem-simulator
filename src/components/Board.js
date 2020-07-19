@@ -14,8 +14,8 @@ export default function Board(props) {
     });
 
     return (
-        <>
-            <div className="felt">
+        <div className="felt">
+            <div className="board">
                 {props.cards.map((card, i) => (
                     <img key={card.toString()} className={`card flop-${i}
                     ${animationFlop ? ' anim-flop' : ''}
@@ -25,6 +25,6 @@ export default function Board(props) {
                     } src={state.deck.cardImgUrl(card)} alt={card} />
                 ))}
             </div>
-        </>
+        </div>
     )
 }
