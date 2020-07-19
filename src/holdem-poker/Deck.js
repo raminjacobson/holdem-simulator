@@ -28,6 +28,7 @@ function Deck() {
 
     this.convertToShortDeck = (fromValue = 0, toValue = 12) => {
         const shortDeck = [];
+        fromValue = fromValue === 12 ? -1 : fromValue; // A
         for (let i = 0; i < deck.length; ++i) {
             if (
                 (fromValue === -1 && i % 13 === 12) ||

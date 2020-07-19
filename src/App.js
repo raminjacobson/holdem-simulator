@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Hold'em Poker Hand Simulator
+        <b>Hold'em Poker Hand Simulator</b>
       </header>
       <Game />
     </div>

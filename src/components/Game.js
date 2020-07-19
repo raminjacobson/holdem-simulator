@@ -17,10 +17,11 @@ export default function Game() {
         return string ? string[1] : null;
     };
     function handleReset() {
-        let from = getQueryString('from') || 0;
-        let to = getQueryString('to') || 12;
-        from = Number(from);
-        to = Number(to);
+        let from = getQueryString('from') || '2';
+        let to = getQueryString('to') || 'A';
+        from = from.toUpperCase() === 'T' ? '10' : from;
+        from = state.deck.VALUES.indexOf(from.toUpperCase());
+        to = state.deck.VALUES.indexOf(to.toUpperCase());
         sleep(state.delay / 2);
         dispatch({
             reducer: ReducerType.GAME,
@@ -119,10 +120,9 @@ export default function Game() {
         await sleep(1.5 * state.delay);
 
         handleTurn();
-        await sleep(1.5 * state.delay);
+        await sleep(2 * state.delay);
 
         handleRiver();
-        await sleep(1.5 * state.delay);
     }
 
     function getCoords(pointCount) {
