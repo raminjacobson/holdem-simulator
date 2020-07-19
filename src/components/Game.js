@@ -127,9 +127,9 @@ export default function Game() {
     }
 
     function getCoords(pointCount) {
-        var width = window.innerWidth - 220,
-            height = window.innerHeight;
-        var rx = 600, ry = 325;
+        var width = state.boardCoords.w + state.boardCoords.x - (300 / 2),
+            height = state.boardCoords.h + state.boardCoords.y / 2;
+        var rx = 600, ry = (state.boardCoords.h - 200) / 2;
         var degree = 360 / pointCount;
         const result = [];
         for (var i = 0; i < pointCount; i++) {

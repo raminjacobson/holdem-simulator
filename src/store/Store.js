@@ -6,17 +6,15 @@ const deck = new Deck();
 deck.shuffle();
 
 const initialState = {
-    currentRound: ReducerActions.GAME.NEW_GAME,
-    playerCount: 2,
     boardCards: [],
-    playerCards: [],
-    history: [],
+    boardCoords: { x: 0, y: 0, w: 0, h: 0 },
+    currentRound: ReducerActions.GAME.NEW_GAME,
     deck: deck,
     delay: 1500,
-    shortDeck: {
-        fromValue: 0,
-        toValue: 12
-    },
+    history: [],
+    playerCards: [],
+    playerCount: 2,
+    shortDeck: { fromValue: 0, toValue: 12 },
     error: null,
 };
 

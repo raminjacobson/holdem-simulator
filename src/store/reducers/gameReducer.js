@@ -7,7 +7,8 @@ const gameActions = {
     DEAL_TURN: 'DEAL_TURN',
     DEAL_RIVER: 'DEAL_RIVER',
     SET_PLAYER_COUNT: 'SET_PLAYER_COUNT',
-    SET_PLAYBACK_SPEED: 'SET_PLAYBACK_SPEED'
+    SET_PLAYBACK_SPEED: 'SET_PLAYBACK_SPEED',
+    SET_BOARD_COORDS: 'SET_BOARD_COORDS'
 }
 
 const gameReducer = (state, { type, payload }) => {
@@ -71,6 +72,16 @@ const gameReducer = (state, { type, payload }) => {
                 delay: payload.speed
             }
 
+        case gameActions.SET_BOARD_COORDS:
+            return {
+                ...state,
+                boardCoords: {
+                    x: payload.x,
+                    y: payload.y,
+                    w: payload.w,
+                    h: payload.h,
+                }
+            }
         default:
             return state;
     }
