@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context, ReducerType, ReducerActions } from '../store/Store';
 import Player from './Player';
 import Board from './Board';
 
 export default function Game() {
     const [state, dispatch] = useContext(Context);
+
+    useEffect(() => {
+        handleReset();
+    }, []);
 
     var getQueryString = function (field, url) {
         var href = url ? url : window.location.href;
