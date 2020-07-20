@@ -155,13 +155,13 @@ button:active {
 }
 
 .player-cards .value {
-  opacity: 0;
+  opacity: .75;
   margin: 0;
   padding: 10px 20px;
   box-sizing: border-box;
   position: absolute;
   bottom: 35%;
   width: 100%;
-  background-color:rgba(0, 0, 0, 0.75);
+  background-color:rgba(0, 0, 0, 0.9);
   font-weight: bold;
 }

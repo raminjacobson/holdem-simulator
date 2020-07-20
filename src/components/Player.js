@@ -12,9 +12,9 @@ export default function Player(props) {
         setAnimation(props.cards.length === 2);
     });
 
-    function handValue(cards) {
-        const sevenCards = cards.concat(state.boardCards);
-        let value = "";
+    function handValue(props) {
+        const sevenCards = props.cards.concat(state.boardCards);
+        let value = `Player ${props.id}`;
         const deck = new Deck();
         const C = sevenCards.map(x => {
             const card = deck.getCard(x);
@@ -40,7 +40,7 @@ export default function Player(props) {
             <div className="player-cards"
                 style={{ position: 'absolute', top: props.coords.y, left: props.coords.x }}>
                 {playerCards}
-                {handValue(props.cards)}
+                {handValue(props)}
             </div>
         </React.Fragment>
     );
