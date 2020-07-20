@@ -127,13 +127,16 @@ export default function Game() {
     }
 
     function getCoords(pointCount) {
-        var width = state.boardCoords.w + state.boardCoords.x - (300 / 2),
+        var width = state.boardCoords.w + state.boardCoords.x - (300 / 2) - 50,
             height = state.boardCoords.h + state.boardCoords.y / 2;
-        var rx = 600, ry = (state.boardCoords.h - 200) / 2;
+        var rx = 650, ry = (state.boardCoords.h - 200) / 2;
         var degree = 360 / pointCount;
         const result = [];
         for (var i = 0; i < pointCount; i++) {
-            var point = polarToCartesian(width / 2, height / 2, rx, ry, i * degree);
+            var angle = i * degree;
+            if (pointCount % 4 === 0) { angle += 45; }
+            else if (pointCount % 2 === 1) { angle += 90; }
+            var point = polarToCartesian(width / 2, height / 2, rx, ry, angle);
             result.push(point);
         }
         function polarToCartesian(centerX, centerY, radiusX, radiusY, angleInDegrees) {
@@ -154,10 +157,7 @@ export default function Game() {
     }
 
     const speed = [500, 750, 1000, 1250, 1500, 2000, 2500, 3000];
-    const dealButton = (
-        state.currentRound === ReducerActions.GAME.NEW_GAME
-        || state.currentRound === ReducerActions.GAME.DEAL_RIVER
-    );
+    const dealButton = state.currentRound === ReducerActions.GAME.NEW_GAME;
     const flopButton = state.currentRound === ReducerActions.GAME.DEAL_CARDS;
     const turnButton = state.currentRound === ReducerActions.GAME.DEAL_FLOP;
     const riverButton = state.currentRound === ReducerActions.GAME.DEAL_TURN;
