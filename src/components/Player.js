@@ -39,8 +39,8 @@ export default function Player(props) {
         <React.Fragment>
             <div className="player-cards"
                 style={{ position: 'absolute', top: props.coords.y, left: props.coords.x }}>
-                {handValue(props)}
                 {playerCards}
+                {handValue(props)}
             </div>
         </React.Fragment>
     );
