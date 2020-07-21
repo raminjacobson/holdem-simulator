@@ -113,7 +113,7 @@ export default function Game() {
     async function handleAutoDeal() {
         if (
             !(state.currentRound === ReducerActions.GAME.NEW_GAME ||
-                state.currentRound !== ReducerActions.GAME.DEAL_RIVER)
+                state.currentRound === ReducerActions.GAME.DEAL_RIVER)
         ) {
             return;
         }
