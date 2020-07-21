@@ -111,6 +111,13 @@ export default function Game() {
     }
 
     async function handleAutoDeal() {
+        if (
+            !(state.currentRound === ReducerActions.GAME.NEW_GAME ||
+                state.currentRound !== ReducerActions.GAME.DEAL_RIVER)
+        ) {
+            return;
+        }
+
         handleReset();
         await sleep(state.delay / 2);
 
@@ -132,10 +139,9 @@ export default function Game() {
         var rx = 650, ry = (state.boardCoords.h - 200) / 2;
         var degree = 360 / pointCount;
         const result = [];
+        const addRotation = adjustment(pointCount);
         for (var i = 0; i < pointCount; i++) {
-            var angle = i * degree;
-            if (pointCount % 4 === 0) { angle += 45; }
-            else if (pointCount % 2 === 1) { angle += 90; }
+            var angle = i * degree + addRotation;
             var point = polarToCartesian(width / 2, height / 2, rx, ry, angle);
             result.push(point);
         }
@@ -147,6 +153,20 @@ export default function Game() {
                 x: Math.floor(x),
                 y: Math.floor(y)
             };
+        }
+        // to ensure sit 1 is on the top-right sit when drawn.
+        function adjustment(count) {
+            let x = 1;
+            switch (parseInt(count)) {
+                case 4: return -45;
+                case 5: return -54;
+                case 6: return -60;
+                case 7: return -64;
+                case 8: return -68;
+                case 9: return -70;
+                case 10: return -72;
+                default: return 0;
+            }
         }
         return result;
     }

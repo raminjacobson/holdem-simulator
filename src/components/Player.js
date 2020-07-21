@@ -32,7 +32,9 @@ export default function Player(props) {
 
     const playerCards = props.cards.map(card =>
         <img key={card.toString()} className={`card-small player-card${animation ? ' fade' : ''}`}
-            src={state.deck.cardImgUrl(card)} alt={card} />
+            src={state.deck.cardImgUrl(card)}
+            alt={state.deck.getCard(card).join('')}
+            title={state.deck.getCard(card).join('')} />
     )
 
     return (
